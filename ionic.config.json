@@ -1,0 +1,7 @@
+{
+  "name": "argo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

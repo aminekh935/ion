@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img src="/assets/logo.png" alt="Logo Café" class="logo">
+      <span class="cafe-name">HABIB'S COFFEE</span>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div class="home-wrapper">
+    <div class="background-image"></div> 
+  <ion-card>
+    <ion-card-content>
+      <!-- Début du formulaire d'inscription -->
+      <form (ngSubmit)="register()" #registerForm="ngForm">
+        <!-- Champ nom -->
+        <ion-item>
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input 
+            type="text" 
+            [(ngModel)]="registerData.fullName" 
+            name="fullName" 
+            required>
+          </ion-input>
+        </ion-item>
+
+        <!-- Champ email -->
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input 
+            type="email" 
+            [(ngModel)]="registerData.email" 
+            name="email" 
+            required 
+            email>
+          </ion-input>
+        </ion-item>
+
+        <!-- Champ mot de passe -->
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input 
+            type="password" 
+            [(ngModel)]="registerData.password" 
+            name="password" 
+            required 
+            minlength="6">
+          </ion-input>
+        </ion-item>
+
+        <!-- Bouton de soumission -->
+        <ion-button expand="block" type="submit" routerLink="/login">Register</ion-button>
+      </form>
+      <!-- Fin du formulaire -->
+    </ion-card-content>
+  </ion-card>
+ </div>
+</ion-content>

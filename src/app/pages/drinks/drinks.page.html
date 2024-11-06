@@ -1,0 +1,55 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img src="/assets/logo.png" alt="Logo Café" class="logo">
+      <span class="cafe-name">HABIB'S COFFEE</span>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="custom-button"  (click)="goToHome()">Home</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="background-image"></div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3" size-md="4" size-lg="3" *ngFor="let drink of drinks">
+        <ion-card class="drink-card">
+          <div class="drink-image" [style.background-image]="getBackgroundImage(drink)"></div>
+          
+            <ion-card-title>{{ drink.name }}</ion-card-title>
+            <ion-card-subtitle>Price: {{ drink.price | currency:'USD' }}</ion-card-subtitle>
+          
+          <ion-card-content>
+            <ion-button expand="block" (click)="deleteDrink(drink.id)" class="custom-button">Delete</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-label position="floating">Drink Name</ion-label>
+    <ion-input [(ngModel)]="newDrink.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Price</ion-label>
+    <ion-input type="number" [(ngModel)]="newDrink.price"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+  </ion-item>
+
+  <ion-item *ngIf="selectedImage">
+    <img [src]="selectedImage" class="image-preview" />
+  </ion-item>
+
+  <ion-button expand="full" (click)="addDrink()" class="custom-button">Add Drink</ion-button>
+</ion-content>
+
+

@@ -1,0 +1,86 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-content>
+  <div class="login-wrapper">
+    <video class="logo-animation" autoplay  (ended)="onVideoEnd($event)">
+      <source src="assets/Habib-coffee.mp4" type="video/mp4">
+    </video>
+    <!-- Video that plays once and pauses on the last frame -->
+    <video #videoEl class="cover-video" autoplay (ended)="onVideoEnd($event)">
+      <source src="assets/coffee-grain.mp4" type="video/mp4">
+    </video>
+<!--
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="cafe-name "><h1>argo</h1></ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content >
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="loginData.email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="loginData.password"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" (click)="login()">Login</ion-button>
+
+        <ion-button fill="clear" expand="block" routerLink="/register">Register</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>-->
+<ion-card>
+ <!-- <ion-card-header>
+    <ion-card-title class="cafe-name"><h1>argo</h1></ion-card-title>
+  </ion-card-header>-->
+  
+  <ion-card-content>
+    <!-- Début du formulaire -->
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <!-- Champ email -->
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input 
+          type="email" 
+          [(ngModel)]="loginData.email" 
+          name="email" 
+          required 
+          email>
+        </ion-input>
+      </ion-item>
+
+      <!-- Champ mot de passe -->
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input 
+          type="password" 
+          [(ngModel)]="loginData.password" 
+          name="password" 
+          required 
+          minlength="6">
+        </ion-input>
+      </ion-item>
+
+      <!-- Bouton  soumission -->
+      
+      <ion-button color="#8B4513"
+        expand="block" 
+        type="submit" 
+        >
+        Login
+      </ion-button>
+      
+      <!-- Lien vers la page d'inscription -->
+      <ion-button color="#8B4513" expand="block" routerLink="/register">Register</ion-button>
+    </form>
+    <!-- Fin du formulaire -->
+  </ion-card-content>
+</ion-card>

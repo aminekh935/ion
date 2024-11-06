@@ -1,0 +1,111 @@
+
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img src="/assets/logo.png" alt="Logo Café" class="logo">
+      <span class="cafe-name">HABIB'S COFFEE</span>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="custom-button" routerLink="/drinks">Drinks</ion-button>
+      <ion-icon class="logout" name="log-out"  routerLink="/login"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-wrapper">
+    <div class="background-image"></div>
+
+
+    <ion-grid>
+     <ion-row>
+      <ion-col size="3" *ngFor="let table of tables; let i = index">
+        <ion-card (click)="selectTable(table)" class="custom-card">
+          <ion-card-header>
+            <ion-card-title>Table {{ table.number }}</ion-card-title>
+            <!-- Bouton e suppression -->
+            <ion-button id="alert-trigger-{{i}}" fill="clear" size="small"  class="delete-button">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-card-header>
+  
+          <ion-card-content>
+            <ion-button (click)="toggleOrders(table)" class="ordr">Orders</ion-button>
+            <div *ngIf="table.showOrders">
+              <ul>
+                <li *ngFor="let order of table.orders">{{ order.name }} - {{ order.price | currency:'dt' }}</li>
+              </ul>
+            </div>
+            <p >Total: {{ getTableTotal(table) | currency:'dt' }}</p>
+          </ion-card-content>
+  
+          <!-- Alerte pour confirmer la suppression -->
+          <ion-alert
+            trigger="alert-trigger-{{i}}"
+            header="Confirmer la suppression"
+            message="Êtes-vous sûr de vouloir supprimer cette table ?"
+            [buttons]="alertButtons"
+            (didDismiss)="setResult($event, i)">
+          </ion-alert>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3" >
+        <ion-card (click)="addTable()" class="custom-card">
+          <ion-card-content>
+            <ion-icon name="add-circle-outline"  class="icon"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+     </ion-row>
+    </ion-grid>
+    <ion-card class="custom-card" *ngIf="selectedTable">
+      <ion-card-header>
+        <ion-card-title>Table {{ selectedTable.number }} Options</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid *ngIf="showDrinksList">
+          <ion-row>
+            <ion-col size="2" *ngFor="let drink of drinks">
+              <ion-card (click)="addDrinkToTable(drink)">
+                <ion-card-header>
+                  <ion-card-title>{{ drink.name }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <p>Price: {{ drink.price | currency:'USD' }}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button class="custom-button" expand="block" (click)="payTable()">Pay</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    
+
+    <ion-card *ngIf="showBill">
+      <ion-card-header>
+        <ion-card-title>Total Addition</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="selectedTable">
+        <p>Order Summary:</p>
+        <ul>
+          <li *ngFor="let item of selectedTable.orders">{{ item.name }} - {{ item.price | currency:'USD' }}</li>
+        </ul>
+        <p>Total: {{ getTableTotal(selectedTable) | currency:'USD' }}</p>
+        <ion-button class="custom-button" expand="block" (click)="setOpen(true)">Imprimer</ion-button>
+        
+        <ion-toast
+    [isOpen]="isToastOpen"
+    message="bien payé"
+    [duration]="500"
+    (didDismiss)="setOpen(false)"
+  > </ion-toast>
+       
+      </ion-card-content>
+    </ion-card>
+    
+  </div>
+</ion-content>

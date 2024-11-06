@@ -1,0 +1,73 @@
+.login-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+  
+    /* Vidéo en arrière-plan */
+    .cover-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Envoyer la vidéo à l'arrière-plan */
+    }
+    .cafe-name {
+        color: #8B4513; /* Marron */
+        font-size: 26px;
+        font-weight: bold;
+        font-style: italic;
+        text-align: center;
+        font-family: 'Roboto'; /* Police personnalisée Roboto */
+        margin: 0 auto;
+      }
+ .logo-animation {
+        width: 150px; /* Adjust width as needed */
+        height: auto; /* Maintain aspect ratio */
+        position: absolute;
+        top: 20px; /* Adjust position as needed */
+        left: 50%;
+        border-radius: 80px;
+        transform: translateX(-50%);
+        z-index: 1; /* Ensure it is above other elements */
+      }
+      
+    /* Styles pour la carte (ion-card) */
+    ion-card {
+      background: rgba(255, 255, 255, 0.8); /* Transparence légère */
+      padding: 20px;
+      opacity: 0.9;
+      border-radius: 10px;
+
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre pour un effet flottant */
+      z-index: 1; /* S'assurer que la carte est au-dessus de la vidéo */
+    }
+    ion-label{
+      font-family: 'Roboto';
+      font-weight: bold;
+      opacity: 0.1;
+        
+        border-radius: 25px;
+
+    }
+  
+   ion-item{
+    border-radius: 12px;
+    padding: 1px;
+
+
+
+   }
+    /* Styles pour les boutons */
+    ion-button {
+      margin-top: 20px;
+      background:#8B4513 ; /* Transparence légère */
+      border-radius: 7px;
+      font-family: 'Roboto';
+      font-weight: bold;
+    }
+  }
+  

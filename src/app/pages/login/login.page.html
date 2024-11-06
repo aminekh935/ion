@@ -1,8 +1,4 @@
-<!--<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>-->
+
 
 <ion-content>
   <div class="login-wrapper">
@@ -13,35 +9,9 @@
     <video #videoEl class="cover-video" autoplay (ended)="onVideoEnd($event)">
       <source src="assets/coffee-grain.mp4" type="video/mp4">
     </video>
-<!--
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="cafe-name "><h1>argo</h1></ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content >
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" [(ngModel)]="loginData.email"></ion-input>
-        </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" [(ngModel)]="loginData.password"></ion-input>
-        </ion-item>
-
-        <ion-button expand="block" (click)="login()">Login</ion-button>
-
-        <ion-button fill="clear" expand="block" routerLink="/register">Register</ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
-</ion-content>-->
 <ion-card>
- <!-- <ion-card-header>
-    <ion-card-title class="cafe-name"><h1>argo</h1></ion-card-title>
-  </ion-card-header>-->
-  
+
   <ion-card-content>
     <!-- Début du formulaire -->
     <form (ngSubmit)="login()" #loginForm="ngForm">

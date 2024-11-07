@@ -12,9 +12,7 @@
     <div class="background-image"></div> 
   <ion-card>
     <ion-card-content>
-      <!-- Début du formulaire d'inscription -->
       <form (ngSubmit)="register()" #registerForm="ngForm">
-        <!-- Champ nom -->
         <ion-item>
           <ion-label position="floating">Full Name</ion-label>
           <ion-input 
@@ -25,7 +23,6 @@
           </ion-input>
         </ion-item>
 
-        <!-- Champ email -->
         <ion-item>
           <ion-label position="floating">Email</ion-label>
           <ion-input 
@@ -37,7 +34,6 @@
           </ion-input>
         </ion-item>
 
-        <!-- Champ mot de passe -->
         <ion-item>
           <ion-label position="floating">Password</ion-label>
           <ion-input 
@@ -49,10 +45,8 @@
           </ion-input>
         </ion-item>
 
-        <!-- Bouton de soumission -->
         <ion-button expand="block" type="submit" routerLink="/login">Register</ion-button>
       </form>
-      <!-- Fin du formulaire -->
     </ion-card-content>
   </ion-card>
  </div>

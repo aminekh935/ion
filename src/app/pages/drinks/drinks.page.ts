@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Drink } from './drinks.module'; // Assuming Drink model is already created
 import { NavController } from '@ionic/angular';
 
@@ -8,12 +8,19 @@ import { NavController } from '@ionic/angular';
   templateUrl: './drinks.page.html',
   styleUrls: ['./drinks.page.scss'],
 })
-export class DrinksPage {
+export class DrinksPage implements OnInit {
   drinks: Drink[] = [];
-  newDrink: Drink = { id: 0, name: '', price: 0 }; // Object to hold new drink data
+  newDrink: Drink = { id: 0, name: '', price: 0, image: '' }; // Object to hold new drink data
   selectedImage: string | ArrayBuffer | null = null; // To store the image preview
 
   constructor(private navCtrl: NavController) {}
+
+  ngOnInit() {
+    const storedDrinks = localStorage.getItem('drinks');
+    if (storedDrinks) {
+      this.drinks = JSON.parse(storedDrinks);
+    }
+  }
   
   goToHome() {
     this.navCtrl.navigateBack('/home');
@@ -40,7 +47,6 @@ export class DrinksPage {
       reader.readAsDataURL(file);
     }
   }
-  
 
   // Add a new drink
   addDrink() {
@@ -48,8 +54,11 @@ export class DrinksPage {
       this.newDrink.id = this.drinks.length + 1; // Assign an ID based on the number of drinks
       this.drinks.push({ ...this.newDrink }); // Add the new drink to the drinks array
 
+      // Save drinks to local storage
+      localStorage.setItem('drinks', JSON.stringify(this.drinks));
+
       // Reset the form fields
-      this.newDrink = { id: 0, name: '', price: 0 };
+      this.newDrink = { id: 0, name: '', price: 0, image: '' };
       this.selectedImage = null; // Reset the image preview
     }
   }
@@ -57,5 +66,7 @@ export class DrinksPage {
   // Delete a drink by id
   deleteDrink(id: number) {
     this.drinks = this.drinks.filter(drink => drink.id !== id);
+    // Update local storage after deletion
+    localStorage.setItem('drinks', JSON.stringify(this.drinks));
   }
 }

@@ -1,46 +1,44 @@
-import { Component} from '@angular/core';
-import { Table, Drink } from './home.module';
 
-
-
+import { Component, OnInit } from '@angular/core';
+import { Table } from './home.module';
+import { Drink } from '../drinks/drinks.module'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage {
-
+export class HomePage implements OnInit {
   tables: Table[] = [];
-  drinks = [
-    { name: 'Coffee', price: 5 },
-    { name: 'Tea', price: 3 },
-    { name: 'Juice', price: 4 },
-  
-
-  ];
+  drinks: Drink[] = []; // Array to hold drinks loaded from localStorage
   isToastOpen = false;
   selectedTable: Table | null = null;
   showDrinksList = false;
   showBill = false;
-
   total = 0;
 
   constructor() {
     // Add some sample tables for demonstration
     this.tables = [
       { number: 1, orders: [], showOrders: false },
-    { number: 2, orders: [], showOrders: false },
-    { number: 3, orders: [], showOrders: false },
-    { number: 4, orders: [], showOrders: false },
-    { number: 5, orders: [], showOrders: false },
-    { number: 6, orders: [], showOrders: false },
-    { number: 7, orders: [], showOrders: false },
-    { number: 8, orders: [], showOrders: false },
-    
-
+      { number: 2, orders: [], showOrders: false },
+      { number: 3, orders: [], showOrders: false },
+      { number: 4, orders: [], showOrders: false },
+      { number: 5, orders: [], showOrders: false },
+      { number: 6, orders: [], showOrders: false },
+      { number: 7, orders: [], showOrders: false },
+      { number: 8, orders: [], showOrders: false },
     ];
   }
+
+  ngOnInit() {
+    // Load drinks from local storage
+    const storedDrinks = localStorage.getItem('drinks');
+    if (storedDrinks) {
+      this.drinks = JSON.parse(storedDrinks);
+    }
+  }
+
   public alertButtons = [
     {
       text: 'Annuler',
@@ -64,34 +62,30 @@ export class HomePage {
       this.selectedTable = null;
     }
   }
-  openDrinksList(table: Table) {
-    this.selectedTable = table;
-    this.showDrinksList = true;
+
+  openDrinksList() {
+    
+    this.selectedTable = null;
   }
 
   deleteTable(index: number) {
-    this.tables.splice(index, 1);  // Supprimer la table par index
+    this.tables.splice(index, 1); // Supprimer la table par index
   }
   
   addTable() {
     const newTableNumber = this.tables.length + 1;
-  this.tables.push({ number: newTableNumber, orders: [], showOrders: false }); 
+    this.tables.push({ number: newTableNumber, orders: [], showOrders: false });
   }
 
   selectTable(table: Table) {
     this.selectedTable = table;
-    this.showDrinksList = false;
-    this.showBill = false;
     this.showDrinksList = true;
-
+    this.showBill = false;
   }
 
-  
-
-  addDrinkToTable(drink: { name: string; price: number }) {
+  addDrinkToTable(drink: Drink) {
     if (this.selectedTable) {
       this.selectedTable.orders.push({ name: drink.name, price: drink.price });
-     // this.showDrinksList = false; // Hide the drinks list after adding
     }
   }
 
@@ -103,29 +97,24 @@ export class HomePage {
     if (this.selectedTable) {
       this.total = this.getTableTotal(this.selectedTable);
       this.showBill = true;
-      
     }
   }
+
   setOpen(isOpen: boolean) {
     this.isToastOpen = isOpen;
     this.showBill = isOpen;
     if (this.selectedTable) {
-    this.selectedTable.orders = [];
-    this.total = 0;}
-  
+      this.selectedTable.orders = [];
+      this.total = 0;
+    }
+  }
 
-  }
   printBill() {
-    // Logique pour imprimer la  ou générer un reçu
-    console.log('payed');
+    console.log('Payed');
     this.showBill = false;
-  
   }
-  
-    // Implement printing logic here if needed
-  
-  toggleOrders(table: any) {
+
+  toggleOrders(table: Table) {
     table.showOrders = !table.showOrders;
   }
-  
 }

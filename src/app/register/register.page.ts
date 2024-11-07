@@ -17,10 +17,14 @@ export class RegisterPage {
   constructor(private navCtrl: NavController) {}
 
   register() {
-    if (this.registerData.fullName && this.registerData.email && this.registerData.password) {
-      // Simulate registration success
+    const { fullName, email, password } = this.registerData;
+    if (fullName && email && password) {
+      // Store the registration data in local storage
+      localStorage.setItem('user', JSON.stringify(this.registerData));
       console.log('User registered:', this.registerData);
-      this.navCtrl.navigateForward('/login');  // Redirect to login after registration
+
+      // Navigate to login page after successful registration
+      this.navCtrl.navigateForward('/login');
     } else {
       console.log('Please fill out the form correctly.');
     }

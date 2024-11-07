@@ -158,10 +158,14 @@ ion-toolbar {
     padding: 0;
     line-height: 1; /* S'assurer que le texte est bien centré */
   }
-  
- /* ion-toolbar {
-    background-color: #416d5d;
-  }*/
+  .drink-card {
+    background-size: cover;
+    cursor: pointer;
+
+    background-position: center;
+    color: rgb(5, 1, 1); /* Optional, to ensure text is visible over image */
+  }
+ 
 
   
   
